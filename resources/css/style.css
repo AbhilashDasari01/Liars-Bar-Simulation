@@ -1,0 +1,615 @@
+* {
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+}
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+   
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+}
+.container h1{
+    font-family: 'Rye', serif;
+    color: #d3a446;
+    text-transform:uppercase;
+    letter-spacing: 8px;
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+.card {
+    font-size: 70px;
+    font-family: 'Rye', serif;
+    width: 110px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222;
+    color: #d3a446;
+    border: 4px solid #d3a446;
+    border-radius: 12px;
+    user-select: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card.flipping {
+    animation: flipCharacter 0.3s infinite linear;
+    color: #fff;
+}
+
+.card.selected {
+    animation: pulse 1s ease;
+    box-shadow: 0 0 20px #d3a446;
+}
+
+/* Revolver Management Styles */
+.revolver-management {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+.add-revolver-section {
+    margin-bottom: 20px;
+}
+
+.add-revolver-section input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #d3a446;
+    background-color: #222;
+    color: #fff;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.add-revolver-section input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #d3a446;
+}
+
+.add-revolver-section input::placeholder {
+    color: #888;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    border: 2px solid #d3a446;
+    background: #222;
+    color: #d3a446;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #d3a446;
+    color: #222;
+}
+
+.add-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Revolver Tabs */
+.revolver-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    
+}
+
+.revolver-tab {
+    padding: 12px 20px;
+    border: 2px solid #666;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 0.3s;
+    position: relative;
+    min-width: 120px;
+}
+
+.revolver-tab:hover {
+    border-color: #d3a446;
+    background-color: #555;
+}
+
+.revolver-tab.active {
+    border-color: #d3a446;
+    background-color: #d3a446;
+    color: #222;
+    font-weight: bold;
+}
+
+.remove-tab {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #e25555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.remove-tab:hover {
+    background-color: #ff4444;
+}
+.revolver-tab.dead span{
+    position: relative;
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+/* Game Area */
+.game-area {
+    display: none;
+    font-family: 'Rye', serif;
+    
+}
+
+.game-area.active {
+    display: block;
+}
+
+.current-revolver-name {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #d3a446;
+    font-family: "Rye", serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    
+}
+
+.no-revolvers {
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+    margin: 40px 0;
+}
+
+/* Original game styles */
+.cylinder {
+    
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cylinder-container {
+    overflow: hidden;
+}
+
+.chamber {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background-color: #666;
+    position: absolute;
+}
+
+.shot {
+    background-color: #d3a446;
+}
+.fired {
+  background-color: red !important;
+  box-shadow: 0 0 10px red;
+}
+.chamber:nth-child(1) {
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.chamber:nth-child(2) {
+    top: 50px;
+    left: 20px;
+}
+
+.chamber:nth-child(3) {
+    top: 50px;
+    right: 20px;
+}
+
+.chamber:nth-child(4) {
+    bottom: 50px;
+    left: 20px;
+}
+
+.chamber:nth-child(5) {
+    bottom: 50px;
+    right: 20px;
+}
+
+.chamber:nth-child(6) {
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.shots-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.shots-count a {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 10px 30px;
+    font-size: 20px;
+    background-color: #222;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.shots-count a:hover {
+    background-color: #444;
+    transform: scale(1.05);
+}
+
+.cylinder.spin {
+    animation: spin 3s cubic-bezier(0.25, 1, 0.05, 1.2);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(1440deg);
+    }
+}
+.game-area button {
+    
+    position: relative;
+    padding: 14px 40px;
+    font-size: 24px;
+    font-family: 'Rye', serif;
+    color: #d3a446;
+    background-color: #111;
+    border: 2px solid #d3a446;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #222 inset;
+}
+
+.game-area button::before,
+.game-area button::after {
+    content: "";
+    position: absolute;
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.game-area button::before {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, #d3a446, transparent);
+    transform: skewX(-20deg);
+}
+
+.game-area button:hover::before {
+    left: 100%;
+}
+
+.game-area button:hover {
+    color: #fff;
+    background-color: #2b2000;
+    box-shadow: 0 0 10px #d3a446, 0 0 30px #d3a446 inset;
+    transform: scale(1.03);
+}
+
+.game-area button:active {
+    transform: scale(0.97);
+}
+
+.outer-ring {
+    width: 45px;
+    height: 45px;
+    background-color: #222;
+    border: 2px solid #888;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.revolver-slot {
+    position: absolute;
+    background-color: #222;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.revolver-slot.slot-one {
+    top: -15px;
+    right: 20px;
+}
+
+.revolver-slot.slot-two {
+    top: -15px;
+    left: 20px;
+    z-index: 1;
+}
+
+.revolver-slot.slot-three {
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.revolver-slot.slot-four {
+    left: 20px;
+    bottom: -15px;
+}
+
+.revolver-slot.slot-five {
+    right: 20px;
+    bottom: -15px;
+}
+
+.revolver-slot.slot-six {
+    right: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+@keyframes flipCharacter {
+    0% { transform: rotateY(0); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+
+
+
+
+.divider {
+    border-top: 2px solid #888;
+    margin: 30px 0;
+    width: 100%;
+}
+
+
+
+#blood-splatter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .5s ease-out;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.damage-warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    background: radial-gradient(transparent,rgba(255,0,0,.1));
+    
+    display: none
+}
+
+@keyframes damage-flash {
+    0% {
+        opacity: .8
+    }
+
+    50% {
+        opacity: .6
+    }
+
+    100% {
+        opacity: .8
+    }
+}
+
+.damage-warning.flash {
+    animation: damage-flash .6s infinite
+    
+}
+
+
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+  font-size: 16px;
+}
+
+.site-footer .heart {
+  color: #e25555;
+}
+
+.site-footer a {
+  color: #d3a446;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+  color: #fff;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  font-size: 20px;
+  color: #d3a446;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+
+
+.shot-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px auto;
+    max-width: 220px;
+}
+
+.death-chance,
+.shot-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.death-chance img,
+.shot-count img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.death-chance span,
+.shot-count span {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .death-chance img,
+    .shot-count img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .death-chance span,
+    .shot-count span {
+        font-size: 16px;
+    }
+    
+    .revolver-tabs {
+        gap: 5px;
+    }
+    
+    .revolver-tab {
+        padding: 8px 12px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+    
+    .add-revolver-section input {
+       
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+.death-chance span,
+.shot-count span {
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

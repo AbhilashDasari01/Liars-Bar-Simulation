@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Experience the thrill of Liar's Bar Russian Roulette with multiple revolvers. Load the revolvers, pull the trigger, and test your luck in this classic high-stakes game of chance. Will you survive?" />
+  <title>Multi-Revolver Russian Roulette Simulation</title>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Rye&display=swap" rel="stylesheet" />  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./resources/css/style.css" />
+
+  
+</head>
+
+  <body>
+
+    <div class="container">
+
+      <h1>Liar's Bar</h1>
+      <h2>Multi-Revolver Russian Roulette Simulation</h2>
+
+      <div class="card-container">
+          <div class="card" id="card" onclick="randomCard()">?</div>
+    </div>
+
+
+
+    <!-- Revolver Management Section -->
+    <div class="revolver-management">
+      <div class="add-revolver-section">
+        <input type="text" id="revolverNameInput" placeholder="Enter revolver name..." maxlength="20">
+        <button class="add-btn" onclick="addRevolver()">Add Revolver</button>
+      </div>
+
+      <!-- Revolver Tabs -->
+      <div class="revolver-tabs" id="revolverTabs">
+        <!-- Tabs will be dynamically generated -->
+      </div>
+    </div>
+    <!-- Game Area Container -->
+    <div id="gameContainer">
+      <!-- Game areas will be dynamically generated -->
+    </div>
+
+    <!-- Sounds -->
+    <audio id="clickSound" src="resources/media/sounds/wind.m4a" preload="auto"></audio>
+    <audio id="chimeSound" src="resources/media/sounds/chime.m4a" preload="auto"></audio>
+    <audio id="gunshotSound" src="resources/media/sounds/headshot.m4a" preload="auto"></audio>
+    <audio id="emptyClickSound" src="resources/media/sounds/quack.m4a" preload="auto"></audio>
+    <audio id="spinSound" src="resources/media/sounds/revolver-spin.mp3" preload="auto"></audio>
+    <audio id="bruhSound" src="resources/media/sounds/bruh.m4a" preload="auto"></audio>
+    
+
+    <div class="damage-warning" id="damageOverlay"></div>
+    
+    <div id="blood-splatter-container">
+        <img src="resources/media/images/splatt1.svg" style="position: fixed; left: 10.6775%; top: 3.95664%; width: 100.168px; height: 100.168px; transform: translate(-50%, -50%) rotate(16.4565deg); opacity: 0.61642; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt3.svg" style="position: fixed; left: 12.3453%; top: 39.7974%; width: 132.846px; height: 132.846px; transform: translate(-50%, -50%) rotate(271.608deg); opacity: 0.48353; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt1.svg" style="position: fixed; left: 37.5973%; top: 31.5609%; width: 158.546px; height: 158.546px; transform: translate(-50%, -50%) rotate(10.1997deg); opacity: 0.622667; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt3.svg" style="position: fixed; left: 29.5786%; top: 38.7361%; width: 164.124px; height: 164.124px; transform: translate(-50%, -50%) rotate(301.365deg); opacity: 0.421067; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt2.svg" style="position: fixed; left: 68.1639%; top: 44.6904%; width: 111.274px; height: 111.274px; transform: translate(-50%, -50%) rotate(17.4398deg); opacity: 0.614149; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt3.svg" style="position: fixed; left: 27.5197%; top: 74.1873%; width: 337.578px; height: 337.578px; transform: translate(-50%, -50%) rotate(222.323deg); opacity: 0.653402; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt3.svg" style="position: fixed; left: 83.5345%; top: 85.6379%; width: 252.663px; height: 252.663px; transform: translate(-50%, -50%) rotate(45.1587deg); opacity: 0.830978; pointer-events: none; filter: brightness(0.8);">
+        <img src="resources/media/images/splatt2.svg" style="position: fixed; left: 11.903%; top: 66.3434%; width: 96.1807px; height: 96.1807px; transform: translate(-50%, -50%) rotate(97.7372deg); opacity: 0.670375; pointer-events: none; filter: brightness(0.8);">
+    </div>
+
+      <!-- Footer -->
+    <footer class="site-footer">
+      <p>
+        Made with <span class="heart">🫶</span> by
+        <a href="https://github.com/AbhilashDasari01" target="_blank">swaeguy</a>
+      </p>
+      <div class="social-icons">
+        <a href="https://github.com/AbhilashDasari01" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://instagram.com/swaeguy" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://youtube.com/@swaeguy" target="_blank" title="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.gg/yq8zuq5Ekw" target="_blank" title="Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://facebook.com/swaeguy" target="_blank" title="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="mailto:swaeguy@gmail.com" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </footer>
+    </div>
+
+    <!-- Main Script -->
+    <script src="./resources/js/script.js"></script>
+
+  </body>
+</html>
